@@ -48,7 +48,8 @@ class Database:
                 fh.write(i)
                 fh.write("\t\t\t")
             fh.write("\n")
-        fh.close()
+            fh.close()
+
 
     def clearFile(self):
         fh = open(str(self.name+".txt"),'w')
