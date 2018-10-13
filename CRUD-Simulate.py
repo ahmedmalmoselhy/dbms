@@ -1,4 +1,3 @@
-import io
 created_databases = []
 created_tables = []
 colNumber = 1

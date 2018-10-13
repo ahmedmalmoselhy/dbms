@@ -2,4 +2,5 @@ Database students Created Successfully
 Table [ names ] Created Successfully
 ---------------------------------------------
 First_Name		Second_Name		Department		Phone_Number
-Ahmed			Hani			CSED			11111			
+Ayman			Ashraf			CB			32576			
+Adel			Nabil			LW			26576			
