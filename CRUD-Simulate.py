@@ -1,3 +1,4 @@
+import io
 created_databases = []
 created_tables = []
 colNumber = 1
@@ -35,6 +36,7 @@ class Database:
         else :
             print("Removed Successfully ! ")
 
+
     def addRecord(self, *args):
         # Check if data entered = number of columns in the table
         if args.__len__() < colNumber:
@@ -46,30 +48,78 @@ class Database:
                 fh.write(i)
                 fh.write("\t\t\t")
             fh.write("\n")
+        fh.close()
 
     def clearFile(self):
         fh = open(str(self.name+".txt"),'w')
         fh.write("")
-# testing
+        fh.close()
+
+    def removeRecord(self, fname):
+        fh = open(str(self.name+".txt"), "r")
+        mydata = fh.read()
+        lines = mydata.split("\n")
+        fh.close()
+        initials = []
+        initials.append(lines.pop(0))
+        initials.append(lines.pop(0))
+        initials.append(lines.pop(0))
+        initials.append(lines.pop(0))
+        lines.pop()
+        # print(lines)
+        for line in lines:
+            if line.startswith(fname):
+                lines.pop(lines.index(line))
+
+        students.clearFile()
+        fh = open(str(self.name + ".txt"), "w")
+        for line in initials:
+            fh.write(line)
+            fh.write("\n")
+
+        for line in lines:
+            fh.write(line)
+            fh.write("\n")
+
+
+
 students = Database("students")
+
+def recordAdding():
+    firstname = input("Enter The First Name : ")
+    lastname = input("Enter The Last Name : ")
+    dep = input("Enter Department : ")
+    phone = input("Enter Phone Number : ")
+
+    students.addRecord(firstname,lastname,dep,phone)
+
+
+# testing
+
 # students.addTable("names" , "First_Name" , "Second_Name" , "Department" , "Phone_Number")
 # students.removeTable("names")
 # students.addRecord("Ahmed", "Hani", "CSED", "11111")
 # students.addRecord("Ali", "Adel", "ECED", "25556")
 
 print("Please select an option to continue\n")
-print("1) Add a table\n2)Add a record\n3)Clear the whole file")
+print("1) Add a table\n2) Add a record\n3) Clear the whole file\n4) Delete a record\nEND) Close app")
 while True:
-    opt = input("Inter A Number \t\t:")
+    opt = input("Inter A Number : ")
     if opt == '1':
         students.addTable("names", "First_Name", "Second_Name", "Department", "Phone_Number")
         print("Table added successfully")
     elif opt == '2':
-        students.addRecord("Ahmed", "Hani", "CSED", "11111")
+        # students.addRecord("Ahmed", "Hani", "CSED", "11111")
+        recordAdding()
         print("Record added successfully")
     elif opt == '3':
         students.clearFile()
         print("File cleared successfully")
         students = Database("students")
+    elif opt == '4':
+        f_name = input("Enter The First Name of The Record You Want To Delete : ")
+        students.removeRecord(f_name)
+    elif opt.upper() == "END":
+        break
     else:
         print("Wrong Input, Try Again")
