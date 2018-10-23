@@ -80,6 +80,7 @@ class Database:
         for line in lines:
             fh.write(line)
             fh.write("\n")
+        print("Record Removed Successfully!")
 
 
 
